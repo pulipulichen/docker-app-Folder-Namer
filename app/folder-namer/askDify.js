@@ -30,8 +30,10 @@ async function uploadFile(filePath, apiKey, user) {
     });
     formData.append('user', user);
 
+    console.log('不行嗎？')
+
     const response = await axios.post(
-      'http://192.168.195.202/v1/files/upload',
+      'http://192.168.100.202/v1/files/upload',
       formData,
       {
         headers: {
