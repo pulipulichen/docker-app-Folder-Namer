@@ -24,6 +24,8 @@ let main = async function () {
 
     // =====================
 
+    console.log(directoryPath)
+
     try {
       const files = await getFiles(directoryPath);
       console.log(`Found ${files.length} files`);
