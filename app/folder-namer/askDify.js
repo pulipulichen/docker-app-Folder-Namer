@@ -41,7 +41,7 @@ async function uploadFile(filePath, apiKey, user) {
       {
         headers: {
           Authorization: `Bearer ${API_KEY}`,
-          // ...formData.getHeaders(),
+          ...formData.getHeaders(),
         },
       }
     );
