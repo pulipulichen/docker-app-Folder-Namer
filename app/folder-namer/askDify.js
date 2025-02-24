@@ -55,7 +55,7 @@ async function uploadFile(filePath, apiKey, user) {
 }
 
 
-async function executeWorkflow(document_id, apiKey, user) {
+async function executeWorkflow(document_id, apiKey, user, context) {
   try {
     // const formData = new FormData();
 
@@ -73,7 +73,7 @@ async function executeWorkflow(document_id, apiKey, user) {
       'http://192.168.100.202/v1/workflows/run',
       {
         inputs: {
-          context: '測試',
+          context,
           'image': [{
             type: "image",
             "transfer_method": "local_file",
@@ -105,7 +105,7 @@ async function executeWorkflow(document_id, apiKey, user) {
 async function askDify(context) {
   const filePath = path.join(__dirname, 'img.jpg');
   let document_id = await uploadFile(filePath, API_KEY, 'abc-123')
-  await executeWorkflow(document_id, API_KEY, 'abc-123');
+  return await executeWorkflow(document_id, API_KEY, 'abc-123', context);
 }
 
 module.exports = askDify
