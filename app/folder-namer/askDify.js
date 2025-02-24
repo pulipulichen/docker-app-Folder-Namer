@@ -1,7 +1,7 @@
 const { difyCompletion, DifyCompletionCallParamsExp, setupDifyApi } = require('@aiapi/dify');
 
 const config = {
-  customHost: '192.168.195.202'
+  customHost: 'http://192.168.195.202/v1'
 }
 
 setupDifyApi(config);
