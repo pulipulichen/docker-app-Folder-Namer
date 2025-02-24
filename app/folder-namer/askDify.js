@@ -19,6 +19,8 @@ function uploadFileWithCurl(filePath, apiKey, user) {
       --form 'file=@${filePath};type=image/jpg' \\
       --form 'user=${user}'`;
 
+    console.log(command)
+
     exec(command, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing curl command: ${error}`);
