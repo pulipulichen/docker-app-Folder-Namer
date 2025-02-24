@@ -11,6 +11,7 @@ const findMiddleFile = require('./folder-namer/findMiddleFile')
 const extractFileLocation = require('./folder-namer/extractFileLocation')
 
 const getFolderContext = require('./folder-namer/getFolderContext')
+const askDify = require('./folder-namer/askDify')
 
 // -------------------------------------------------------------
 
@@ -72,6 +73,11 @@ ${folderContext}`)
 
       let contextString = contextList.join('\n\n')
       console.log(contextString)
+
+      // =================================================================
+
+      let askResult = await askDify(middleFile, contextString)
+      console.log(`Ask Dify result: ${askResult}`)
 
       // =================================================================
     } catch (err) {

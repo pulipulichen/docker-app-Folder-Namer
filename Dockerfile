@@ -1,4 +1,5 @@
 FROM pudding/docker-app:ubuntu-20.04-nodejs-12.14.1-20230810-0130
 
 RUN npm link exif-parser
+RUN npm link @aiapi/dify
 # RUN npm install axios
