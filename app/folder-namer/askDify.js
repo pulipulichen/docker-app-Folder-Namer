@@ -37,7 +37,7 @@ async function uploadFile(filePath, apiKey, user) {
       formData,
       {
         headers: {
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${API_KEY}`,
           ...formData.getHeaders(),
         },
       }
