@@ -18,7 +18,7 @@ const params = {
 
 
 async function askDify() {
-  const response = difyCompletion(params);
+  const response = await difyCompletion(params);
   console.log(response);
 }
 
