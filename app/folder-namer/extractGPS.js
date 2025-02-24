@@ -5,7 +5,7 @@ function extractGPS(filePath) {
     const buffer = fs.readFileSync(filePath);
     const parser = ExifParser.create(buffer);
     const result = parser.parse();
-
+    console.log(result)
     if (result.tags.GPSLatitude && result.tags.GPSLongitude) {
         const latitude = convertDMSToDD(result.tags.GPSLatitude, result.tags.GPSLatitudeRef);
         const longitude = convertDMSToDD(result.tags.GPSLongitude, result.tags.GPSLongitudeRef);
