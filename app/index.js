@@ -10,6 +10,8 @@ const getFiles = require('./folder-namer/getFiles')
 const findMiddleFile = require('./folder-namer/findMiddleFile')
 const extractFileLocation = require('./folder-namer/extractFileLocation')
 
+const getFolderContext = require('./folder-namer/getFolderContext')
+
 // -------------------------------------------------------------
 
 
@@ -49,6 +51,11 @@ let main = async function () {
 
       let locationInfo = await extractFileLocation(middleFile)
       console.log(locationInfo)
+
+      // =================================================================
+
+      let folderContext = getFolderContext(files)
+      console.log(folderContext)
 
       // =================================================================
     } catch (err) {
