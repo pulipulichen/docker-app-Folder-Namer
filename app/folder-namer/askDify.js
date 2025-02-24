@@ -62,9 +62,11 @@ async function askDify() {
     // form.pipe(req);
 
     const form = new FormData();
-    form.append("first", 3);
+    form.append("user", 'abc-123');
     // other data should go here
     form.append("file", fs.createReadStream(path.join(__dirname, 'img.jpg')));
+
+    console.log(API_URL)
 
     let result = await axios({
       method: "post",
