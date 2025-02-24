@@ -58,6 +58,22 @@ let main = async function () {
       console.log(folderContext)
 
       // =================================================================
+
+      let contextList = []
+      if (locationInfo) {
+        contextList.push(`地理位置資訊：
+${JSON.stringify(locationInfo, null, 2)}`)
+      }
+
+      if (folderContext && folderContext.length > 0) {
+        contextList.push(`資料夾內的檔案列表：
+${folderContext}`)
+      }
+
+      let contextString = contextList.join('\n\n')
+      console.log(contextString)
+
+      // =================================================================
     } catch (err) {
         console.error("Error:", err);
     }
