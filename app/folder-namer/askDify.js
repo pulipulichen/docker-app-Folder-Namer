@@ -85,8 +85,8 @@ async function executeWorkflow(document_id, apiKey, user) {
       }
     );
 
-    console.log('Upload successful:', response.data);
-    return response.data.id;
+    console.log('Upload successful:', response.data.data.outputs.text);
+    return response.data.data.outputs.text;
   } catch (error) {
     console.error('Upload failed:', error.response ? error.response.data : error.message);
     throw error; // Re-throw the error to be handled by the caller, if needed
