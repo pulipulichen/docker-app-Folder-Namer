@@ -5,6 +5,7 @@ const GetExistedArgv = require('./lib/GetExistedArgv')
 const path = require('path')
 const fs = require('fs')
 
+const isNamedFolder = require('./folder-namer/isNamedFolder')
 const getFiles = require('./folder-namer/getFiles')
 const findMiddleFile = require('./folder-namer/findMiddleFile')
 
@@ -24,6 +25,10 @@ let main = async function () {
 
     // =====================
 
+    if (isNamedFolder(directoryPath)) {
+      continue
+    }
+    
     console.log(directoryPath)
 
     try {
