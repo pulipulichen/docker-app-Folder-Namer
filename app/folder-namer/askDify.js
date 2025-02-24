@@ -6,7 +6,7 @@ const path = require('path');
 
 const API_HOST = '192.168.100.202';
 const API_PATH = '/v1/chat-messages';
-const API_KEY = 'app-4q36WEjAeo8uxOHaTo61imRh'; // Replace with your actual API key
+const API_KEY = 'app-oNLncwOFIZ0rO2sxH237amkd'; // Replace with your actual API key
 
 const API_URL = `http://${API_HOST}/v1/files/upload`; // 替換為你的 Workflow ID
 
