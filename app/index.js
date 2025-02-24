@@ -30,7 +30,7 @@ let main = async function () {
     // =====================
 
     if (isNamedFolder(directoryPath)) {
-      continue
+      // continue
     }
     
     // console.log(directoryPath)
