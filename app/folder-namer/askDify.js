@@ -74,11 +74,11 @@ async function executeWorkflow(document_id, apiKey, user) {
       {
         inputs: {
           context: '測試',
-          'file': {
+          'file': [{
             type: "image",
             "transfer_method": "local_file",
             "upload_file_id": document_id
-          }
+          }]
         },
         "response_mode": "blocking",
         user: user
