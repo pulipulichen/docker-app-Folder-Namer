@@ -21,6 +21,7 @@ async function askDify() {
       inputs: testInput,
       user: 'abc-123'
     }));
+
     form.append('file', fs.createReadStream(path.join(__dirname, 'img.jpg')));
 
     const options = {
@@ -33,7 +34,10 @@ async function askDify() {
 
     const req = http.request(API_URL, options, (res) => {
         let data = '';
-        res.on('data', (chunk) => { data += chunk; });
+        res.on('data', (chunk) => { 
+          console.log(chunk)
+          data += chunk; 
+        });
         res.on('end', () => {
             try {
                 const parsedData = JSON.parse(data);
@@ -44,6 +48,8 @@ async function askDify() {
             }
         });
     })
+
+    console.log(options)
 
     req.on('error', (error) => {
       console.error("Error executing workflow:", error.message);
