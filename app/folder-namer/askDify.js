@@ -75,7 +75,7 @@ async function executeWorkflow(document_id, apiKey, user) {
         inputs: {
           context: '測試',
           'file': [{
-            type: "image",
+            type: "image/jpg",
             "transfer_method": "local_file",
             "upload_file_id": document_id
           }]
