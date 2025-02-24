@@ -8,14 +8,7 @@ services:
       - CONTAINER_NAME=docker-app-folder-namer-app
       - LOCAL_VOLUMN_PATH=/input/
       - RUN_COMMAND=node /app/index.js
-    networks:
-      - my_bridge_network
     volumes: 
       - ./app:/app/
       - __SOURCE__:/input/
       - __SOURCE__:/output/
-
-
-networks:
-  my_bridge_network:
-    driver: bridge
