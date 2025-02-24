@@ -76,8 +76,9 @@ let main = async function () {
 
       // =================================================================
 
-      let askResult = await askDify(middleFile, contextString)
-      console.log(`Ask Dify result: ${askResult}`)
+      // let askResult = await askDify(middleFile, contextString)
+      // console.log(`Ask Dify result: ${askResult}`)
+      await askDify()
 
       // =================================================================
     } catch (err) {
