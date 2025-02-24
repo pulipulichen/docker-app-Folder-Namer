@@ -29,14 +29,18 @@ let main = async function () {
       continue
     }
     
-    console.log(directoryPath)
+    // console.log(directoryPath)
 
     try {
       const files = await getFiles(directoryPath);
       console.log(`Found ${files.length} files`);
       console.log(files)
 
-      console.log(await findMiddleFile(files))
+      let middleFile = await findMiddleFile(files)
+      if (middleFile) {
+        middleFile = path.join(directoryPath, middleFile)
+      }
+      console.log(`Found ${middleFile}`)
     } catch (err) {
         console.error("Error:", err);
     }
