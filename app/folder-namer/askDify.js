@@ -26,6 +26,7 @@ async function askDify() {
 
     const options = {
         method: 'POST',
+        path: API_URL,
         headers: {
             ...form.getHeaders(),
             "Authorization": `Bearer ${API_KEY}`
@@ -33,7 +34,7 @@ async function askDify() {
     };
 
     console.log(API_URL)
-    const req = http.request(API_URL, options, (res) => {
+    const req = http.request(options, (res) => {
         let data = '';
         res.on('data', (chunk) => { 
           console.log(chunk)
