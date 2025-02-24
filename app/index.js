@@ -6,6 +6,7 @@ const path = require('path')
 const fs = require('fs')
 
 const getFiles = require('./folder-namer/getFiles')
+const findMiddleFile = require('./folder-namer/findMiddleFile')
 
 // -------------------------------------------------------------
 
@@ -27,6 +28,8 @@ let main = async function () {
       const files = await getFiles(directoryPath);
       console.log(`Found ${files.length} files`);
       console.log(files)
+
+      console.log(await findMiddleFile(files))
     } catch (err) {
         console.error("Error:", err);
     }
