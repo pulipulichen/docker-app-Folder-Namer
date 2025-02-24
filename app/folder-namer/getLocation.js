@@ -1,27 +1,32 @@
-const axios = require('axios').default;
+const https = require('https');
 
 async function getLocation(lat, lon) {
-  
     const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`;
 
-    try {
-        const response = await axios.get(url, {
-            headers: { 'User-Agent': 'YourApp/1.0 (your@email.com)' }
+    return new Promise((resolve, reject) => {
+        https.get(url, { headers: { 'User-Agent': 'YourApp/1.0 (your@email.com)' } }, (res) => {
+            let data = '';
+            
+            res.on('data', chunk => {
+                data += chunk;
+            });
+            
+            res.on('end', () => {
+                try {
+                    const jsonData = JSON.parse(data);
+                    let city = jsonData.address.city || jsonData.address.town || jsonData.address.village || '';
+                    let county = jsonData.address.county || '';
+                    let landmark = jsonData.display_name;
+                    
+                    resolve({ city, county, landmark });
+                } catch (error) {
+                    reject({ error: '解析錯誤', details: error.message });
+                }
+            });
+        }).on('error', (error) => {
+            reject({ error: '請求錯誤', details: error.message });
         });
-        const data = response.data;
-        
-        let city = data.address.city || data.address.town || data.address.village || '';
-        let county = data.address.county || '';
-        let landmark = data.display_name;
-
-        return {
-            city,
-            county,
-            landmark
-        };
-    } catch (error) {
-        return { error: '請求錯誤', details: error.message };
-    }
+    });
 }
 
 module.exports = getLocation
