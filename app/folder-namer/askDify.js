@@ -40,7 +40,7 @@ function uploadFileWithCurl(filePath, apiKey, user) {
 
 async function askDify(context) {
   const filePath = path.join(__dirname, 'img.jpg');
-  return uploadFile(filePath, API_KEY, 'abc-123')
+  return uploadFileWithCurl(filePath, API_KEY, 'abc-123')
 }
 
 module.exports = askDify
