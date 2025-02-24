@@ -71,7 +71,12 @@ async function executeWorkflow(document_id, apiKey, user) {
       'http://192.168.100.202/v1/workflows/run',
       {
         inputs: {
-          context: '測試'
+          context: '測試',
+          'file': {
+            type: "image",
+            "transfer_method": "local_file",
+            "upload_file_id": document_id
+          }
         },
         "response_mode": "blocking",
         user: user
@@ -85,8 +90,9 @@ async function executeWorkflow(document_id, apiKey, user) {
       }
     );
 
-    console.log('Upload successful:', response.data.data.outputs.text);
-    return response.data.data.outputs.text;
+    let output = response.data.data.outputs.text
+    console.log('Upload successful:', output);
+    return output;
   } catch (error) {
     console.error('Upload failed:', error.response ? error.response.data : error.message);
     throw error; // Re-throw the error to be handled by the caller, if needed
@@ -95,8 +101,8 @@ async function executeWorkflow(document_id, apiKey, user) {
 
 async function askDify(context) {
   const filePath = path.join(__dirname, 'img.jpg');
-  // let document_id = await uploadFile(filePath, API_KEY, 'abc-123')
-  await executeWorkflow(filePath, API_KEY, 'abc-123');
+  let document_id = await uploadFile(filePath, API_KEY, 'abc-123')
+  await executeWorkflow(document_id, API_KEY, 'abc-123');
 }
 
 module.exports = askDify
