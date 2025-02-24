@@ -7,8 +7,11 @@ function extractGPS(filePath) {
     const result = parser.parse();
     console.log(result)
     if (result.tags.GPSLatitude && result.tags.GPSLongitude) {
-        const latitude = convertDMSToDD(result.tags.GPSLatitude, result.tags.GPSLatitudeRef);
-        const longitude = convertDMSToDD(result.tags.GPSLongitude, result.tags.GPSLongitudeRef);
+        // const latitude = convertDMSToDD(result.tags.GPSLatitude, result.tags.GPSLatitudeRef);
+        // const longitude = convertDMSToDD(result.tags.GPSLongitude, result.tags.GPSLongitudeRef);
+
+        const latitude = result.tags.GPSLatitude
+        const longitude = result.tags.GPSLongitude
         return { latitude, longitude };
     }
 
