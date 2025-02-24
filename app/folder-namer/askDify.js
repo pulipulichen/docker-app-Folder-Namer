@@ -32,6 +32,7 @@ async function askDify() {
         }
     };
 
+    console.log(API_URL)
     const req = http.request(API_URL, options, (res) => {
         let data = '';
         res.on('data', (chunk) => { 
