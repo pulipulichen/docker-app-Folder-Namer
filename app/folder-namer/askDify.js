@@ -27,7 +27,7 @@ async function askDify() {
         method: 'POST',
         headers: {
             ...form.getHeaders(),
-            "Authorization": `Bearer ${DIFY_API_KEY}`
+            "Authorization": `Bearer ${API_KEY}`
         }
     };
 
