@@ -26,6 +26,7 @@
     "url": "https://blog.pulipuli.info"
   },
   "license": "MIT",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/pulipulichen/docker-app-Archive-List/issues"
   },
