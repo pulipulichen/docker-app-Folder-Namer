@@ -80,7 +80,7 @@ async function executeWorkflow(document_id, apiKey, user) {
         headers: {
           Authorization: `Bearer ${API_KEY}`,
           "Content-Type": "application/json",
-          ...formData.getHeaders(),
+          // ...formData.getHeaders(),
         },
       }
     );
