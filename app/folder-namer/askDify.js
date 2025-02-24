@@ -73,7 +73,7 @@ async function askDify() {
       url: API_URL,
       data: form,
       headers: { 
-        ...form.getHeaders(),
+        // ...form.getHeaders(),
         "Authorization": `Bearer ${API_KEY}`
      }
     });
