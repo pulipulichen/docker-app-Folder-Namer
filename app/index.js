@@ -8,6 +8,7 @@ const fs = require('fs')
 const isNamedFolder = require('./folder-namer/isNamedFolder')
 const getFiles = require('./folder-namer/getFiles')
 const findMiddleFile = require('./folder-namer/findMiddleFile')
+const extractFileLocation = require('./folder-namer/extractFileLocation')
 
 // -------------------------------------------------------------
 
@@ -36,11 +37,20 @@ let main = async function () {
       console.log(`Found ${files.length} files`);
       console.log(files)
 
+      // =================================================================
+
       let middleFile = await findMiddleFile(files)
       if (middleFile) {
         middleFile = path.join(directoryPath, middleFile)
       }
-      console.log(`Found ${middleFile}`)
+      console.log(`Middle file: ${middleFile}`)
+
+      // =================================================================
+
+      let locationInfo = await extractFileLocation(middleFile)
+      console.log(locationInfo)
+
+      // =================================================================
     } catch (err) {
         console.error("Error:", err);
     }
