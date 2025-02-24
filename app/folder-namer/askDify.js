@@ -1,10 +1,9 @@
 const { difyCompletion, DifyCompletionCallParamsExp, setupDifyApi } = require('@aiapi/dify');
 
 const config = {
-  customHost: 'http://192.168.195.202/v1'
+  customHost: '192.168.100.202'
 }
 
-setupDifyApi(config);
 
 const params = {
     query: 'Your query here',
@@ -18,6 +17,7 @@ const params = {
 
 
 async function askDify() {
+  await setupDifyApi(config);
   const response = await difyCompletion(params);
   console.log(response);
 }
