@@ -102,8 +102,7 @@ async function executeWorkflow(document_id, apiKey, user, context) {
   }
 }
 
-async function askDify(context) {
-  const filePath = path.join(__dirname, 'img.jpg');
+async function askDify(filePath, context) {
   let document_id = await uploadFile(filePath, API_KEY, 'abc-123')
   return await executeWorkflow(document_id, API_KEY, 'abc-123', context);
 }

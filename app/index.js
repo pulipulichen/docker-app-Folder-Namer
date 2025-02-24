@@ -38,7 +38,7 @@ let main = async function () {
     try {
       const files = await getFiles(directoryPath);
       console.log(`Found ${files.length} files`);
-      console.log(files)
+      // console.log(files)
 
       // =================================================================
 
@@ -51,12 +51,12 @@ let main = async function () {
       // =================================================================
 
       let locationInfo = await extractFileLocation(middleFile)
-      console.log(locationInfo)
+      // console.log(locationInfo)
 
       // =================================================================
 
       let folderContext = getFolderContext(files)
-      console.log(folderContext)
+      // console.log(folderContext)
 
       // =================================================================
 
@@ -72,14 +72,14 @@ ${folderContext}`)
       }
 
       let contextString = contextList.join('\n\n')
-      console.log(contextString)
+      console.log({contextString})
 
       // =================================================================
 
-      
 
-      // let askResult = await askDify(middleFile, contextString)
-      // console.log(`Ask Dify result: ${askResult}`)
+
+      let askResult = await askDify(middleFile, contextString)
+      console.log(`Ask Dify result: ${askResult}`)
       // await askDify()
 
       // =================================================================
