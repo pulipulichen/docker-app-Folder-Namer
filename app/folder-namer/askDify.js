@@ -67,6 +67,8 @@ async function executeWorkflow(document_id, apiKey, user) {
 
     // console.log('不行嗎？',)
 
+    console.log({document_id})
+
     const response = await axios.post(
       'http://192.168.100.202/v1/workflows/run',
       {
