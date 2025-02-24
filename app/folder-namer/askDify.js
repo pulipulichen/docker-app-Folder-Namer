@@ -12,74 +12,46 @@ const API_KEY = 'app-oNLncwOFIZ0rO2sxH237amkd'; // Replace with your actual API 
 const API_URL = `http://${API_HOST}/v1/files/upload`; // 替換為你的 Workflow ID
 
 
-async function askDify() {
-  return new Promise(async (resolve, reject) => {
-    // const form = new FormData();
+async function uploadFile(filePath, apiKey, user) {
+  try {
+    const fileStream = fs.createReadStream(filePath);
+    const formData = new FormData();
 
-    // const testInput = { question: "Node.js 如何整合 AI API?" };
+    const fileExtension = path.extname(filePath).slice(1).toLowerCase();
+    let contentType = `image/${fileExtension}`;
 
-    // form.append('inputs', JSON.stringify({
-    //   inputs: testInput,
-    //   user: 'abc-123'
-    // }));
+    if (!['png', 'jpeg', 'jpg', 'webp', 'gif'].includes(fileExtension)) {
+      throw new Error("Unsupported file type. Please use png, jpeg, jpg, webp, or gif.");
+    }
 
-    // form.append('file', fs.createReadStream(path.join(__dirname, 'img.jpg')));
-
-    // const options = {
-    //     method: 'POST',
-    //     path: API_URL,
-    //     headers: {
-    //         ...form.getHeaders(),
-    //         "Authorization": `Bearer ${API_KEY}`
-    //     }
-    // };
-
-    // console.log(API_URL)
-    // const req = http.request(API_URL, options, (res) => {
-    //     let data = '';
-    //     res.on('data', (chunk) => { 
-    //       console.log(chunk)
-    //       data += chunk; 
-    //     });
-    //     res.on('end', () => {
-    //         try {
-    //             const parsedData = JSON.parse(data);
-    //             console.log("Dify Workflow Response:", parsedData);
-    //             resolve(parsedData);
-    //         } catch (error) {
-    //             reject(error);
-    //         }
-    //     });
-    // })
-
-    // console.log(options)
-
-    // req.on('error', (error) => {
-    //   console.error("Error executing workflow:", error.message);
-    //   reject(error);
-    // });
-
-    // form.pipe(req);
-
-    const form = new FormData();
-    form.append("user", 'abc-123');
-    // other data should go here
-    form.append("file", fs.createReadStream(path.join(__dirname, 'img.jpg')));
-
-    console.log(API_URL)
-
-    let result = await axios({
-      method: "post",
-      url: API_URL,
-      data: form,
-      headers: { 
-        // ...form.getHeaders(),
-        "Authorization": `Bearer ${API_KEY}`
-     }
+    formData.append('file', fileStream, {
+      contentType: contentType,
+      filename: path.basename(filePath),
     });
+    formData.append('user', user);
 
-    console.log(result)
-  });
+    const response = await axios.post(
+      'http://192.168.195.202/v1/files/upload',
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          ...formData.getHeaders(),
+        },
+      }
+    );
+
+    console.log('Upload successful:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Upload failed:', error.response ? error.response.data : error.message);
+    throw error; // Re-throw the error to be handled by the caller, if needed
+  }
+}
+
+async function askDify(context) {
+  const filePath = path.join(__dirname, 'img.jpg');
+  return uploadFile(filePath, API_KEY, 'abc-123')
 }
 
 module.exports = askDify
