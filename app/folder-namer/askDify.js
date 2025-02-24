@@ -21,6 +21,8 @@ async function askDify() {
     // ]
   });
 
+  console.log({requestData})
+
   const options = {
     hostname: API_HOST,
     port: 80, // HTTP uses port 80, change to 443 for HTTPS
