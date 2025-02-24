@@ -1,24 +1,24 @@
 const http = require('http');
 
-const API_HOST = '192.168.195.202';
+const API_HOST = '192.168.100.202';
 const API_PATH = '/v1/chat-messages';
 const API_KEY = 'app-4q36WEjAeo8uxOHaTo61imRh'; // Replace with your actual API key
 
 async function askDify() {
   
   const requestData = JSON.stringify({
-    inputs: {},
+    // inputs: {},
     query: "What are the specs of the iPhone 13 Pro Max?",
-    response_mode: "streaming",
-    conversation_id: "",
-    user: "abc-123",
-    files: [
-        {
-            type: "image",
-            transfer_method: "remote_url",
-            url: "https://cloud.dify.ai/logo/logo-site.png"
-        }
-    ]
+    // response_mode: "streaming",
+    // conversation_id: "",
+    // user: "abc-123",
+    // files: [
+    //     {
+    //         type: "image",
+    //         transfer_method: "remote_url",
+    //         url: "https://cloud.dify.ai/logo/logo-site.png"
+    //     }
+    // ]
   });
 
   const options = {
@@ -33,6 +33,8 @@ async function askDify() {
     }
   };
 
+
+
   const sendRequest = async () => {
       return new Promise((resolve, reject) => {
           const req = http.request(options, (res) => {
@@ -40,6 +42,7 @@ async function askDify() {
               let responseData = '';
               
               res.on('data', (chunk) => {
+                console.log(chunk)
                   responseData += chunk;
               });
 
