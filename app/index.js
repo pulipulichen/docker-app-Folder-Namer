@@ -36,43 +36,43 @@ let main = async function () {
     // console.log(directoryPath)
 
     try {
-      const files = await getFiles(directoryPath);
-      console.log(`Found ${files.length} files`);
-      console.log(files)
+//       const files = await getFiles(directoryPath);
+//       console.log(`Found ${files.length} files`);
+//       console.log(files)
 
-      // =================================================================
+//       // =================================================================
 
-      let middleFile = await findMiddleFile(files)
-      if (middleFile) {
-        middleFile = path.join(directoryPath, middleFile)
-      }
-      console.log(`Middle file: ${middleFile}`)
+//       let middleFile = await findMiddleFile(files)
+//       if (middleFile) {
+//         middleFile = path.join(directoryPath, middleFile)
+//       }
+//       console.log(`Middle file: ${middleFile}`)
 
-      // =================================================================
+//       // =================================================================
 
-      let locationInfo = await extractFileLocation(middleFile)
-      console.log(locationInfo)
+//       let locationInfo = await extractFileLocation(middleFile)
+//       console.log(locationInfo)
 
-      // =================================================================
+//       // =================================================================
 
-      let folderContext = getFolderContext(files)
-      console.log(folderContext)
+//       let folderContext = getFolderContext(files)
+//       console.log(folderContext)
 
-      // =================================================================
+//       // =================================================================
 
-      let contextList = []
-      if (locationInfo) {
-        contextList.push(`地理位置資訊：
-${JSON.stringify(locationInfo, null, 2)}`)
-      }
+//       let contextList = []
+//       if (locationInfo) {
+//         contextList.push(`地理位置資訊：
+// ${JSON.stringify(locationInfo, null, 2)}`)
+//       }
 
-      if (folderContext && folderContext.length > 0) {
-        contextList.push(`資料夾內的檔案列表：
-${folderContext}`)
-      }
+//       if (folderContext && folderContext.length > 0) {
+//         contextList.push(`資料夾內的檔案列表：
+// ${folderContext}`)
+//       }
 
-      let contextString = contextList.join('\n\n')
-      console.log(contextString)
+//       let contextString = contextList.join('\n\n')
+//       console.log(contextString)
 
       // =================================================================
 
