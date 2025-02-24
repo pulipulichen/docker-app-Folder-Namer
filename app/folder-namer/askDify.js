@@ -11,46 +11,31 @@ const API_KEY = 'app-oNLncwOFIZ0rO2sxH237amkd'; // Replace with your actual API 
 
 const API_URL = `http://${API_HOST}/v1/files/upload`; // 替換為你的 Workflow ID
 
+function uploadFileWithCurl(filePath, apiKey, user) {
+  return new Promise((resolve, reject) => {
+    const command = `curl -X POST 'http://192.168.100.202/v1/files/upload' \\
+      --header 'Authorization: Bearer ${apiKey}' \\
+      --form 'file=@${filePath};type=image/jpg' \\
+      --form 'user=${user}'`;
 
-async function uploadFile(filePath, apiKey, user) {
-  try {
-    const fileStream = fs.createReadStream(filePath);
-    const formData = new FormData();
-
-    const fileExtension = path.extname(filePath).slice(1).toLowerCase();
-    let contentType = `image/${fileExtension}`;
-
-    if (!['png', 'jpeg', 'jpg', 'webp', 'gif'].includes(fileExtension)) {
-      throw new Error("Unsupported file type. Please use png, jpeg, jpg, webp, or gif.");
-    }
-
-    console.log(contentType)
-
-    formData.append('file', fileStream, {
-      contentType: contentType,
-      filename: path.basename(filePath),
-    });
-    formData.append('user', user);
-
-    console.log('不行嗎？', filePath)
-
-    const response = await axios.post(
-      'http://192.168.100.202/v1/files/upload',
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-          ...formData.getHeaders(),
-        },
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error executing curl command: ${error}`);
+        reject(error);
+        return;
       }
-    );
-
-    console.log('Upload successful:', response.data);
-    return response.data;
-  } catch (error) {
-    console.error('Upload failed:', error.response ? error.response.data : error.message);
-    throw error; // Re-throw the error to be handled by the caller, if needed
-  }
+      if (stderr) {
+        console.error(`curl command stderr: ${stderr}`);
+      }
+      try {
+        const result = JSON.parse(stdout); // Attempt to parse JSON response
+        resolve(result);
+      } catch (parseError) {
+        console.log(`curl command stdout: ${stdout}`); //if not json, print the output.
+        resolve(stdout); // Resolve with the raw output if parsing fails
+      }
+    });
+  });
 }
 
 async function askDify(context) {
