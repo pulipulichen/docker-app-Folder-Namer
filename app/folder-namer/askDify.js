@@ -24,8 +24,8 @@ async function uploadFile(filePath, apiKey, user) {
       throw new Error("Unsupported file type. Please use png, jpeg, jpg, webp, or gif.");
     }
 
-    console.log(filePath)
-    console.log(contentType)
+    // console.log(filePath)
+    // console.log(contentType)
 
     formData.append('file', fileStream, {
       contentType: contentType,
@@ -33,7 +33,7 @@ async function uploadFile(filePath, apiKey, user) {
     });
     formData.append('user', user);
 
-    console.log('不行嗎？',)
+    // console.log('不行嗎？',)
 
     const response = await axios.post(
       'http://192.168.100.202/v1/files/upload',
@@ -47,7 +47,46 @@ async function uploadFile(filePath, apiKey, user) {
     );
 
     console.log('Upload successful:', response.data);
-    return response.data;
+    return response.data.id;
+  } catch (error) {
+    console.error('Upload failed:', error.response ? error.response.data : error.message);
+    throw error; // Re-throw the error to be handled by the caller, if needed
+  }
+}
+
+
+async function executeWorkflow(document_id, apiKey, user) {
+  try {
+    // const formData = new FormData();
+
+    // formData.append('file', fileStream, {
+    //   contentType: contentType,
+    //   filename: path.basename(filePath),
+    // });
+    // formData.append('user', user);
+
+    // console.log('不行嗎？',)
+
+    const response = await axios.post(
+      'http://192.168.100.202/v1/workflows/run',
+      {
+        inputs: {
+          context: '測試'
+        },
+        "response_mode": "blocking",
+        user: user
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          "Content-Type": "application/json",
+          ...formData.getHeaders(),
+        },
+      }
+    );
+
+    console.log('Upload successful:', response.data);
+    return response.data.id;
   } catch (error) {
     console.error('Upload failed:', error.response ? error.response.data : error.message);
     throw error; // Re-throw the error to be handled by the caller, if needed
@@ -56,7 +95,8 @@ async function uploadFile(filePath, apiKey, user) {
 
 async function askDify(context) {
   const filePath = path.join(__dirname, 'img.jpg');
-  return uploadFile(filePath, API_KEY, 'abc-123')
+  // let document_id = await uploadFile(filePath, API_KEY, 'abc-123')
+  await executeWorkflow(filePath, API_KEY, 'abc-123');
 }
 
 module.exports = askDify
