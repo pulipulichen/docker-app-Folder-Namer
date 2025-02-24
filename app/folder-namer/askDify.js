@@ -24,6 +24,7 @@ async function uploadFile(filePath, apiKey, user) {
       throw new Error("Unsupported file type. Please use png, jpeg, jpg, webp, or gif.");
     }
 
+    console.log(filePath)
     console.log(contentType)
 
     formData.append('file', fileStream, {
