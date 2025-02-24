@@ -82,6 +82,10 @@ ${folderContext}`)
       console.log(`Ask Dify result: ${askResult}`)
       // await askDify()
 
+      if (askResult && askResult.length > 5) {
+        fs.renameSync(directoryPath, directoryPath + ' ' + askResult)
+      }
+
       // =================================================================
     } catch (err) {
         console.error("Error:", err);
