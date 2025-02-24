@@ -1,4 +1,4 @@
-async function getFileContext(files) {
+function getFileContext(files) {
     return files.map(({path}) => path).join('\n')
 }
 
