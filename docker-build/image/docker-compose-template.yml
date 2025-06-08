@@ -3,6 +3,7 @@ services:
   app:
     image: pudding/docker-app:docker-app-Folder-Namer-20250224.164759
     tty: true
+    user: "${UID}:${GID}"
     command: node /app/index.js "/input/__INPUT__"
     environment:
       - CONTAINER_NAME=docker-app-folder-namer-app
